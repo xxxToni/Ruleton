@@ -7,6 +7,7 @@ const textoMensaje = document.getElementById("mensaje");
 const listaNombresUI = document.getElementById("lista-nombres");
 const contadorNombres = document.getElementById("contador-nombres");
 const btnModo = document.getElementById("btn-modo"); 
+const btnReiniciar = document.getElementById("btn-reiniciar"); // Nuevo botón
 
 let opciones = []; 
 const colores = ["#3498db", "#2ecc71", "#f1c40f", "#9b59b6", "#e74c3c", "#e67e22"];
@@ -290,14 +291,11 @@ canvas.addEventListener('transitionend', () => {
     const seleccionado = opciones[indiceSeleccionado];
     
     if (!modoEliminacion) {
-        // MODO CLÁSICO: Gana el primero que cae
         textoMensaje.textContent = "El ganador es " + seleccionado;
         textoMensaje.style.color = "#2ecc71";
         indicePendienteEliminar = -1; 
     } else {
-        // MODO ELIMINACIÓN:
         if (cantidadOpciones === 2) {
-            // Lógica original restaurada: El que sale seleccionado, ¡GANA!
             textoMensaje.textContent = "El ganador es " + seleccionado;
             textoMensaje.style.color = "#2ecc71";
             
@@ -313,4 +311,25 @@ canvas.addEventListener('transitionend', () => {
 
     girando = false; 
     document.body.style.pointerEvents = "auto";
+});
+
+btnReiniciar.addEventListener('click', () => {
+    if (girando) return; 
+
+    if (opciones.length === 0) return; 
+
+    if (confirm("¿Estás seguro de que quieres limpiar toda la ruleta?")) {
+        opciones = []; 
+        indicePendienteEliminar = -1;
+        
+        canvas.style.transition = 'none';
+        gradosActuales = 0;
+        canvas.style.transform = `rotate(0deg)`;
+        
+        dibujarRuleta(); 
+        actualizarListaNombres(); 
+        
+        textoMensaje.textContent = "Ruleta limpia";
+        textoMensaje.style.color = "#34495e";
+    }
 });

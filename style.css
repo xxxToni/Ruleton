@@ -181,13 +181,33 @@ button:hover { background-color: #2980b9; }
     border-radius: 10px;
 }
 
-.contenedor-lista h3 {
+/* Nuevos estilos para el título y el botón de reinicio */
+.titulo-lista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 0 0 15px 0;
     color: #2c3e50;
     font-size: 18px;
     font-weight: 600;
     padding-bottom: 12px;
     border-bottom: 2px solid #f1f0ff; 
+}
+
+.btn-icono {
+    background: transparent;
+    border: none;
+    width: auto;
+    padding: 5px;
+    font-size: 20px;
+    color: #555;
+    transition: transform 0.4s ease;
+    cursor: pointer;
+}
+
+.btn-icono:hover {
+    background: transparent;
+    transform: rotate(180deg);
 }
 
 ul {
